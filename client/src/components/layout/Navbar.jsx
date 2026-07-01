@@ -14,7 +14,7 @@ import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import {
   FiShoppingCart, FiUser, FiMenu, FiX, FiLogOut,
   FiPackage, FiHeart, FiSettings, FiChevronDown,
-  FiSearch, FiHome, FiGrid,
+  FiSearch, FiHome, FiGrid, FiCalendar,
 } from "react-icons/fi";
 import { useAuth }     from "../../context/AuthContext";
 import { useCart }     from "../../context/CartContext";
