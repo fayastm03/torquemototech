@@ -22,6 +22,7 @@ const Footer = () => {
     Services: [
       { label: "Book Service",   to: "/book-service" },
       { label: "Used Bikes",     to: "/bikes" },
+      { label: "Vehicle Rentals",to: "/rentals" },
       { label: "General Service",to: "/book-service" },
       { label: "Modifications",  to: "/book-service" },
     ],

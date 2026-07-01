@@ -23,6 +23,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import bikeRoutes from "./routes/bikeRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
+import rentalRoutes from "./routes/rentalRoutes.js";
 
 
 // ─── Load Environment Variables ──────────────────────────────────────────────
@@ -95,6 +96,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/bikes", bikeRoutes);
 app.use("/api/bookings", bookingRoutes);
+app.use("/api/rentals", rentalRoutes);
 
 // ─── Error Handling Middleware ────────────────────────────────────────────────
 // IMPORTANT: These MUST be registered AFTER all routes

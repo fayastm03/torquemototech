@@ -241,6 +241,8 @@ const Dashboard = () => {
             <div className="glass-card p-5 bg-dark-100 border border-white/5 space-y-3">
               <h4 className="font-bold text-xs text-slate-400 uppercase tracking-widest mb-2">Management Links</h4>
               <Link to="/admin/products" className="block text-xs font-semibold text-orange-400 hover:underline">→ Manage Store Products</Link>
+              <Link to="/admin/bikes" className="block text-xs font-semibold text-orange-400 hover:underline">→ Manage Used Bikes</Link>
+              <Link to="/admin/rentals" className="block text-xs font-semibold text-orange-400 hover:underline">→ Manage Rentals Fleet</Link>
               <Link to="/admin/orders" className="block text-xs font-semibold text-orange-400 hover:underline">→ View Shop Orders</Link>
               <Link to="/admin/users" className="block text-xs font-semibold text-orange-400 hover:underline">→ Manage User Roles</Link>
             </div>

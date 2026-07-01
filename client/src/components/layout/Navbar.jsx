@@ -79,6 +79,7 @@ const Navbar = () => {
     { to: "/",            label: "Home",         icon: <FiHome size={15} /> },
     { to: "/shop",        label: "Store",        icon: <FiGrid size={15} /> },
     { to: "/bikes",       label: "Used Bikes",   icon: <FiPackage size={15} /> },
+    { to: "/rentals",     label: "Rentals",      icon: <FiCalendar size={15} /> },
     { to: "/book-service",label: "Book Service", icon: <FiSettings size={15} /> },
   ];
 

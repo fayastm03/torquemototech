@@ -9,6 +9,7 @@ import Bike from "../models/Bike.js";
 import Order from "../models/Order.js";
 import Cart from "../models/Cart.js";
 import Booking from "../models/Booking.js";
+import Rental from "../models/Rental.js";
 
 dotenv.config();
 
@@ -176,6 +177,54 @@ const getSampleBikes = (adminId) => [
   },
 ];
 
+// ─── Sample Rentals ────────────────────────────────────────────────────────
+const getSampleRentals = (adminId) => [
+  {
+    name: "Royal Enfield Himalayan 411",
+    type: "Bike",
+    ratePerDay: 1200,
+    transmission: "Manual",
+    fuelType: "Petrol",
+    description: "Ultimate adventure tourer. Perfect for long rides and off-road tracks. Well-maintained and fitted with custom crash guards and luggage racks.",
+    images: ["https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600"],
+    availability: true,
+    createdBy: adminId,
+  },
+  {
+    name: "KTM Duke 250",
+    type: "Bike",
+    ratePerDay: 1000,
+    transmission: "Manual",
+    fuelType: "Petrol",
+    description: "High-performance street naked motorcycle. Nimble, aggressive, and perfect for city commuting and quick weekend getaways.",
+    images: ["https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?w=600"],
+    availability: true,
+    createdBy: adminId,
+  },
+  {
+    name: "Maruti Suzuki Swift",
+    type: "Car",
+    ratePerDay: 1800,
+    transmission: "Manual",
+    fuelType: "Petrol",
+    description: "Reliable hatchback with excellent fuel economy and comfort. Perfect for family trips and driving around Kannur city.",
+    images: ["https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600"],
+    availability: true,
+    createdBy: adminId,
+  },
+  {
+    name: "Mahindra Thar 4x4",
+    type: "Car",
+    ratePerDay: 3500,
+    transmission: "Automatic",
+    fuelType: "Diesel",
+    description: "Rugged 4x4 SUV. Open road presence, raw power, and ultimate capability. Best choice for weekend road trips.",
+    images: ["https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600"],
+    availability: true,
+    createdBy: adminId,
+  },
+];
+
 // ─── Import Data ───────────────────────────────────────────────────────────
 const importData = async () => {
   try {
@@ -189,6 +238,7 @@ const importData = async () => {
     await Order.deleteMany();
     await Cart.deleteMany();
     await Booking.deleteMany();
+    await Rental.deleteMany();
     console.log("🗑️ Existing data cleared");
 
     // Create users
@@ -209,6 +259,11 @@ const importData = async () => {
     const sampleBikes = getSampleBikes(adminUser._id);
     await Bike.insertMany(sampleBikes);
     console.log(`🏍️ ${sampleBikes.length} pre-owned bikes seeded`);
+
+    // Create rentals
+    const sampleRentals = getSampleRentals(adminUser._id);
+    await Rental.insertMany(sampleRentals);
+    console.log(`🚗 ${sampleRentals.length} rental vehicles seeded`);
 
     console.log("\n🎉 Torque MotoTech Database Seeded Successfully!");
     console.log("────────────────────────────────────────────────");
@@ -235,6 +290,7 @@ const destroyData = async () => {
     await Order.deleteMany();
     await Cart.deleteMany();
     await Booking.deleteMany();
+    await Rental.deleteMany();
 
     console.log("🗑️ All data destroyed!");
     process.exit(0);

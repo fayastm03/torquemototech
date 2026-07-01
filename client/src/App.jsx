@@ -19,6 +19,7 @@ import Home         from "./pages/Home";
 import Shop         from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import Bikes         from "./pages/Bikes";
+import Rentals       from "./pages/Rentals";
 import Bookings      from "./pages/Bookings";
 import Login        from "./pages/Login";
 import Register     from "./pages/Register";
@@ -39,6 +40,8 @@ import AdminOrders     from "./pages/admin/Orders";
 import AdminUsers      from "./pages/admin/Users";
 import AddProduct      from "./pages/admin/AddProduct";
 import EditProduct     from "./pages/admin/EditProduct";
+import AdminBikes      from "./pages/admin/Bikes";
+import AdminRentals    from "./pages/admin/Rentals";
 
 function App() {
   return (
@@ -76,6 +79,7 @@ function App() {
         <Route path="/shop"         element={<Shop />} />
         <Route path="/shop/:id"     element={<ProductDetail />} />
         <Route path="/bikes"        element={<Bikes />} />
+        <Route path="/rentals"      element={<Rentals />} />
         <Route path="/book-service" element={<Bookings />} />
         <Route path="/login"        element={<Login />} />
         <Route path="/register"     element={<Register />} />
@@ -95,6 +99,8 @@ function App() {
         <Route path="/admin/products/edit/:id"  element={<AdminRoute><EditProduct /></AdminRoute>} />
         <Route path="/admin/orders"    element={<AdminRoute><AdminOrders /></AdminRoute>} />
         <Route path="/admin/users"     element={<AdminRoute><AdminUsers /></AdminRoute>} />
+        <Route path="/admin/bikes"     element={<AdminRoute><AdminBikes /></AdminRoute>} />
+        <Route path="/admin/rentals"   element={<AdminRoute><AdminRentals /></AdminRoute>} />
 
         {/* 404 — must be last */}
         <Route path="*" element={<NotFound />} />
