@@ -37,11 +37,27 @@ const app = express();
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
 
-// CORS: Allows our React frontend (running on port 5173) to call this API
-// Without CORS, browsers block cross-origin requests for security reasons
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, postman)
+      if (!origin) return callback(null, true);
+      
+      const allowedOrigins = [
+        "http://localhost:5173",
+        process.env.CLIENT_URL
+      ];
+      
+      const isAllowed = allowedOrigins.includes(origin) || 
+                        origin.endsWith(".vercel.app") ||
+                        origin.includes("vercel.app");
+                        
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true, // Allow cookies/auth headers
   })
 );
