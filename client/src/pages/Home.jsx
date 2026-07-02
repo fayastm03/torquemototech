@@ -49,25 +49,25 @@ const Home = () => {
       title: "General Service",
       desc: "Complete checkup, lubrication, brake adjustments, chain cleaning, oiling, wash & polish.",
       price: "₹899 onwards",
-      image: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=600",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEH7CmBtT3E7_1dBBzzWKwpGBSMKr-hbtheZqRxOH5Q&s=10",
     },
     {
       title: "Engine Repair & Tuning",
       desc: "Major engine overhauls, valve adjustments, compression restores, tuning for peak performance.",
       price: "Estimate on inspection",
-      image: "https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?w=600",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2-qRHiW3wZr5C8oAZAQpSCo4vh6AiaDukqrAaopY25w&s=10",
     },
     {
       title: "Oil Change & Filters",
       desc: "Replacement with high-quality synthetic lubricants (Motul, Castrol) and fresh OEM oil filters.",
       price: "Oil Cost + ₹150",
-      image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwfQgMmgbimInSLO8I_Py88BFnImqBaeqFH-2NtA5ULw&s=10",
     },
     {
       title: "Custom Modifications",
       desc: "Exhaust fits, handle modifications, performance air filters, tail tidies, auxiliary lights.",
       price: "Custom quotation",
-      image: "https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=600",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbykeq4CV3DYT4kUM1HvnShcwQ3rr4Ve_t4k83mZV2lA&s=10",
     },
   ];
 
