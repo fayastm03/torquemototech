@@ -9,6 +9,7 @@ import {
 } from "react-icons/fi";
 import { getFeaturedProducts } from "../services/productService";
 import { getBikes } from "../services/bikeService";
+import { getRentals } from "../services/rentalService";
 import ProductCard from "../components/product/ProductCard";
 import Button from "../components/common/Button";
 import Spinner from "../components/common/Spinner";
@@ -19,18 +20,21 @@ const Home = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [bikes, setBikes] = useState([]);
+  const [rentals, setRentals] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [prodData, bikeData] = await Promise.all([
+        const [prodData, bikeData, rentalData] = await Promise.all([
           getFeaturedProducts(),
           getBikes(),
+          getRentals(),
         ]);
         setProducts(prodData || []);
         setBikes(bikeData || []);
+        setRentals(rentalData || []);
       } catch (err) {
         console.error("Home page data fetch error:", err);
       } finally {
@@ -45,7 +49,7 @@ const Home = () => {
       title: "General Service",
       desc: "Complete checkup, lubrication, brake adjustments, chain cleaning, oiling, wash & polish.",
       price: "₹899 onwards",
-      image: "https://images.unsplash.com/photo-1449495277389-d10f8f9db5a6?w=600",
+      image: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=600",
     },
     {
       title: "Engine Repair & Tuning",
@@ -208,6 +212,88 @@ const Home = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+      {/* ── VEHICLE RENTAL FLEET ───────────────────────────────────────── */}
+      <section className="py-20 bg-dark-300 border-t border-b border-white/5">
+        <div className="container-custom">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <span className="text-sm font-bold text-orange-400 uppercase tracking-widest">Explore Kannur</span>
+              <h2 className="section-title mt-2 font-display">Premium Car & Bike Rentals</h2>
+              <p className="text-xs text-slate-500 mt-1">Rent top-tier motorcycles & premium cars for local rides</p>
+            </div>
+            <Link to="/rentals" className="text-xs sm:text-sm font-semibold text-orange-400 hover:text-orange-300 flex items-center gap-1.5 transition-colors">
+              View All Fleet <FiArrowRight size={16} />
+            </Link>
+          </div>
+
+          {loading ? (
+            <div className="flex justify-center py-12">
+              <Spinner size="lg" />
+            </div>
+          ) : rentals.length > 0 ? (
+            <div className="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory scrollbar-none md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {rentals.slice(0, 4).map((vehicle) => (
+                <div
+                  key={vehicle._id}
+                  className="glass-card flex-shrink-0 w-[280px] md:w-auto snap-start flex flex-col h-full overflow-hidden border border-white/5 bg-dark-100 hover:border-orange-500/30 hover:shadow-card group"
+                >
+                  {/* Image container */}
+                  <div className="aspect-[4/3] w-full overflow-hidden relative">
+                    <img
+                      src={vehicle.images[0]}
+                      alt={vehicle.name}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute top-3 right-3 flex flex-col gap-1.5">
+                      <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-dark-300/80 text-orange-400 border border-white/5 backdrop-blur-sm">
+                        {vehicle.type}
+                      </span>
+                      <span className={`px-2 py-0.5 rounded text-[9px] font-bold backdrop-blur-sm border ${
+                        vehicle.availability
+                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                          : "bg-rose-500/10 text-rose-400 border-rose-500/20"
+                      }`}>
+                        {vehicle.availability ? "Available" : "Rented Out"}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Details */}
+                  <div className="p-5 flex-1 flex flex-col">
+                    <h3 className="font-display font-black text-sm text-white mb-2 line-clamp-1 group-hover:text-orange-400 transition-colors">
+                      {vehicle.name}
+                    </h3>
+                    
+                    <div className="flex gap-2 mb-4">
+                      <span className="px-2 py-0.5 rounded text-[9px] bg-dark-200 text-slate-400 border border-white/5">
+                        {vehicle.transmission}
+                      </span>
+                      <span className="px-2 py-0.5 rounded text-[9px] bg-dark-200 text-slate-400 border border-white/5">
+                        {vehicle.fuelType}
+                      </span>
+                    </div>
+
+                    <div className="pt-4 border-t border-white/5 flex items-center justify-between mt-auto">
+                      <div>
+                        <span className="text-[10px] text-slate-500 block uppercase font-bold tracking-wider">Rate</span>
+                        <span className="text-xs font-black text-white">{formatPrice(vehicle.ratePerDay)} <span className="text-[10px] font-normal text-slate-500">/ Day</span></span>
+                      </div>
+                      <Link
+                        to="/rentals"
+                        className="text-xs font-bold bg-orange-500/10 text-orange-400 border border-orange-500/20 px-3 py-1.5 rounded-lg hover:bg-orange-500 hover:text-white transition-all duration-200"
+                      >
+                        Book Ride
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-slate-500">No rental vehicles available in the fleet.</div>
+          )}
         </div>
       </section>
 
