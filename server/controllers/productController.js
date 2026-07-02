@@ -95,10 +95,18 @@ export const getProducts = async (req, res) => {
 // @access  Public
 export const getFeaturedProducts = async (req, res) => {
   try {
-    const products = await Product.find({ isFeatured: true })
+    let products = await Product.find({ isFeatured: true })
       .limit(8)
       .select("-reviews")
       .sort({ createdAt: -1 });
+
+    // Fallback: If no products are flagged as featured, return the latest 8 products
+    if (!products || products.length === 0) {
+      products = await Product.find({})
+        .limit(8)
+        .select("-reviews")
+        .sort({ createdAt: -1 });
+    }
 
     return sendResponse(res, 200, "Featured products fetched", { products });
   } catch (error) {
