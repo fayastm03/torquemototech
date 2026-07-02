@@ -1,6 +1,3 @@
-// pages/admin/Rentals.jsx
-// WHY: Table list of all rental vehicles (cars/bikes) for the admin. Includes a modal for Adding and Editing listings.
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiPlus, FiEdit2, FiTrash2, FiSearch, FiCheck, FiX } from "react-icons/fi";
@@ -8,6 +5,7 @@ import { getRentals, createRentalListing, updateRentalListing, deleteRentalListi
 import Spinner from "../../components/common/Spinner";
 import Button from "../../components/common/Button";
 import { formatPrice } from "../../utils/helpers";
+import { compressAndConvertToBase64 } from "../../utils/imageUpload";
 import toast from "react-hot-toast";
 
 const AdminRentals = () => {
@@ -28,6 +26,21 @@ const AdminRentals = () => {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [availability, setAvailability] = useState(true);
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      const base64 = await compressAndConvertToBase64(file);
+      setImageUrl(base64);
+      toast.success("Local image uploaded and optimized successfully!");
+    } catch (err) {
+      console.error("Error uploading image:", err);
+      toast.error("Could not process local image");
+    }
+  };
+
 
   const fetchRentals = async () => {
     try {
@@ -333,14 +346,32 @@ const AdminRentals = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-slate-400 font-bold mb-1.5">Image URL *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="https://example.com/vehicle.jpg"
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
-                    className="form-input"
-                  />
+                  <div className="space-y-2">
+                    <input
+                      type="text"
+                      required
+                      placeholder="https://example.com/vehicle.jpg"
+                      value={imageUrl}
+                      onChange={(e) => setImageUrl(e.target.value)}
+                      className="form-input"
+                    />
+                    <div className="flex items-center gap-2">
+                      <label className="cursor-pointer bg-dark-200 border border-white/10 hover:border-orange-500/30 px-3 py-1.5 rounded-lg text-[10px] font-bold text-slate-300 hover:text-white transition-all duration-200">
+                        <span>📁 Choose File</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          className="hidden"
+                        />
+                      </label>
+                      {imageUrl && (
+                        <span className="text-[9px] text-slate-500 truncate max-w-[120px]">
+                          Selected ({imageUrl.startsWith("data:") ? "Local" : "Web URL"})
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-slate-400 font-bold mb-1.5">Availability</label>
