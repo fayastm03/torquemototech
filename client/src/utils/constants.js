@@ -4,15 +4,9 @@
 
 export const CATEGORIES = [
   "All",
-  "Electronics",
-  "Clothing",
-  "Footwear",
+  "Spare Parts",
   "Accessories",
-  "Home & Kitchen",
-  "Books",
-  "Toys",
-  "Sports",
-  "Beauty",
+  "Riding Gear",
   "Other",
 ];
 
